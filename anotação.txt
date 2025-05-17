@@ -1,0 +1,49 @@
+Projeto: ProjetoAPI
+Descrição: API para gerenciamento de projetos utilizando Spring Boot, Thymeleaf, H2 e Tailwind CSS.
+
+Estrutura do Projeto:
+
+src/
+├── main/
+│   ├── java/
+│   │   └── com/
+│   │       └── gerenciamento/
+│   │           └── projetoapi/
+│   │               ├── config/           # Configurações do projeto (Spring Security, JWT, etc.)
+│   │               ├── controller/       # Controladores REST
+│   │               ├── model/            # Classes de domínio (entidades JPA)
+│   │               ├── repository/       # Interfaces JPA para o banco de dados
+│   │               └── service/          # Regras de negócio e lógica de aplicação
+│   ├── resources/
+│   │   ├── static/        # Arquivos estáticos (CSS, JS, imagens)
+│   │   ├── templates/     # Templates Thymeleaf
+│   │   ├── application.properties  # Configurações do Spring Boot
+│   │   └── data.sql       # Script de inicialização do banco de dados
+└── test/
+    └── java/
+        └── com/
+            └── gerenciamento/
+                └── projetoapi/
+                    ├── controller/       # Testes dos controladores
+                    ├── service/          # Testes dos serviços
+                    └── repository/       # Testes dos repositórios
+
+Arquitetura:
+- MVC com API REST:
+  - Controller: Recebe e trata as requisições.
+  - Service: Contém a lógica de negócios.
+  - Repository: Gerencia o acesso aos dados.
+  - Model: Representa as entidades do sistema.
+
+Principais Padrões de Projeto:
+- Singleton: Gerenciamento de beans do Spring.
+- Strategy: Estratégias de autenticação e autorização.
+
+Recursos Incluídos:
+1. API REST para CRUD de Projetos, Tarefas, Equipes, Membros e Usuários.
+2. Interface administrativa com Thymeleaf.
+3. Autenticação com Spring Security (JWT).
+4. Banco de dados H2 para desenvolvimento e testes.
+5. Layout moderno com Tailwind CSS.
+
+Esta estrutura está preparada para desenvolver tanto as APIs REST quanto as telas administrativas.
