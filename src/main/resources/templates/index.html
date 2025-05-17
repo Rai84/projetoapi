@@ -1,0 +1,27 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${title}">Gerenciamento de Projetos</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100">
+
+<header class="bg-blue-600 p-4 text-white">
+    <h1 class="text-2xl" th:text="${headerTitle}">Gerenciamento de Projetos</h1>
+</header>
+
+<main class="p-8">
+    <div class="container mx-auto" th:fragment="content">
+        <!-- Aqui será inserido o conteúdo das páginas específicas -->
+    </div>
+</main>
+
+<footer class="bg-blue-600 p-4 text-white text-center">
+    <p>© 2025 - Sistema de Gerenciamento de Projetos</p>
+</footer>
+
+</body>
+</html>

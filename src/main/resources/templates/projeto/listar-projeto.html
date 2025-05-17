@@ -1,0 +1,31 @@
+<body>
+    <h1>Lista de Projetos</h1>
+    
+    <h2 class="text-xl mb-4">Lista de Projetos</h2>
+    <a href="/projetos/novo" class="bg-green-500 text-white px-4 py-2 rounded">Novo Projeto</a>
+    
+    <table class="mt-4 border-collapse w-full">
+        <thead>
+            <tr>
+                <th class="border p-2">ID</th>
+                <th class="border p-2">Nome</th>
+                <th class="border p-2">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${projetos.isEmpty()}">
+                <td colspan="3">Nenhum projeto encontrado.</td>
+            </tr>
+            <tr th:each="projeto : ${projetos}">
+                <td class="border p-2" th:text="${projeto.id}"></td>
+                <td class="border p-2" th:text="${projeto.nome}"></td>
+                <td class="border p-2">
+                    <a th:href="@{/projetos/editar/{id}(id=${projeto.id})}" class="text-blue-500">Editar</a>
+                    <a th:href="@{/api/projetos/{id}(id=${projeto.id})}" class="text-red-500" th:method="delete">Deletar</a>
+                </td>
+            </tr>
+        </tbody>
+        
+    </table>
+    </body>
+    
