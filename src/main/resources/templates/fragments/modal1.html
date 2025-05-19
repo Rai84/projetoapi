@@ -1,5 +1,9 @@
-<div class="bg-white rounded-lg shadow-lg p-6 w-96">
-    <h2 class="text-xl font-bold mb-4">Modal de Teste</h2>
-    <p>Este é um modal de exemplo carregado dinamicamente!</p>
+<div class="bg-white rounded-lg shadow-lg p-6 w-96 h-100 text-black">
+    <p class="text-xl font-bold mb-4">Olá: <span th:text="${username}"></span></p>
+    <p class="mb-4">Você está logado como: <span th:text="${username}"></span></p>
+    <p class="text-xl font-bold mb-4">ID: <span id="idUsuario"></span></p>
+
+    <a th:href="@{/usuarios/editar/{id}(id=${idUsuario})}" class="text-blue-500 hover:underline">Editar</a>
+
     <button onclick="closeModal()" class="mt-4 bg-red-500 text-white px-3 py-1 rounded">Fechar</button>
 </div>

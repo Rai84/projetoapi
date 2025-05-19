@@ -7,17 +7,18 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
 </head>
-<body class="bg-neutral-700 absolute top-0 left-40 w-[calc(var(--spacing)*10rem)] h-full m-4">
+<body class="bg-neutral-700 absolute top-0 left-40 w-[calc(var(--spacing)*10rem)] h-full m-4 text-white">
 
     <div id="menuContainer"></div>
     <div id="modalContainer" class="absolute"></div>
 
-    <h1>Bem-vindo ao Gerenciamento de Projetos</h1>
-    <p>Esta é a página inicial do sistema.</p>
-    <p>Você pode navegar pelo menu à esquerda.</p>
+    
+    <p>Nome do Usuário: <span th:text="${username}"></span></p>
+    <h1>sgahbNJKM</h1>
 
-    <button onclick="openModal('modal1')" class="bg-blue-500 text-white p-2 rounded">Abrir Modal 1</button>
-    <button onclick="openModal('modal2')" class="bg-green-500 text-white p-2 rounded">Abrir Modal 2</button>
+    <a th:href="@{/usuarios}">Lista de Usuários</a>
+    <a th:href="@{/usuarios/novo}">Novo Usuário</a>
+
 
     <script th:src="@{/js/menu.js}"></script>
     <script th:src="@{/js/modal.js}"></script>

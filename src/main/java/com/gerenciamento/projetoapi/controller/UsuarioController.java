@@ -2,53 +2,66 @@ package com.gerenciamento.projetoapi.controller;
 
 import com.gerenciamento.projetoapi.model.Usuario;
 import com.gerenciamento.projetoapi.service.UsuarioService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
-@RestController
-@RequestMapping("/api/usuarios")
+@Controller
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;
-
     @Autowired
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
-    }
+    private UsuarioService usuarioService;
 
+    // Listar usuários com paginação
     @GetMapping
-    public ResponseEntity<List<Usuario>> listarUsuarios() {
-        return ResponseEntity.ok(usuarioService.listarUsuarios());
+    public String listarUsuarios(Model model, @RequestParam(defaultValue = "0") int page) {
+        Page<Usuario> usuariosPage = usuarioService.listarUsuarios(PageRequest.of(page, 10));
+        model.addAttribute("usuarios", usuariosPage.getContent());
+        model.addAttribute("usuariosPage", usuariosPage);
+        return "usuario/lista"; // templates/usuarios/lista.html
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarUsuario(@PathVariable Long id) {
-        Optional<Usuario> usuario = usuarioService.buscarUsuario(id);
-        return usuario.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    // Mostrar formulário para novo usuário
+    @GetMapping("/novo")
+    public String mostrarFormularioCriarUsuario(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "usuario/novo"; // templates/usuarios/novo.html
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-        try {
-            Usuario usuarioAtualizado = usuarioService.atualizarUsuario(id, usuario);
-            return ResponseEntity.ok(usuarioAtualizado);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        }
+    // Salvar novo usuário
+    @PostMapping("/salvar")
+    public String salvarUsuario(@Valid @ModelAttribute Usuario usuario) {
+        usuarioService.salvarUsuario(usuario);
+        return "redirect:/usuarios";
     }
 
-@DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarUsuario(@PathVariable Long id) {
-        try {
-            usuarioService.deletarUsuario(id);
-            return ResponseEntity.noContent().build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        }
+    // Mostrar formulário para editar usuário
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditarUsuario(@PathVariable Long id, Model model) throws Exception {
+        Usuario usuario = usuarioService.buscarUsuario(id)
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado: " + id));
+        model.addAttribute("usuario", usuario);
+        return "usuario/editar"; // templates/usuarios/editar.html
+    }
+
+    // Atualizar usuário
+    @PostMapping("/atualizar/{id}")
+    public String atualizarUsuario(@PathVariable Long id, @Valid @ModelAttribute Usuario usuario) throws Exception {
+        usuarioService.atualizarUsuario(id, usuario);
+        return "redirect:/usuarios";
+    }
+
+    // Deletar usuário
+    @GetMapping("/deletar/{id}")
+    public String deletarUsuario(@PathVariable Long id) throws Exception {
+        usuarioService.deletarUsuario(id);
+        return "redirect:/usuarios";
     }
 }
