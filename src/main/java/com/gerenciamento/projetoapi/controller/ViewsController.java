@@ -12,6 +12,26 @@ public class ViewsController {
     @Autowired
     private ProjetoService projetoService;
 
+    // Página inicial
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    // Página menu
+    @GetMapping("/fragments/menu")
+    public String menu() {
+        return "fragments/menu";
+    }   
+
+    // Modais 
+    @GetMapping("/modal/{modalName}")
+    public String getModal(@PathVariable String modalName) {
+        return "fragments/" + modalName;
+    }
+
+    // Páginas de Usuário
+
     // Páginas de Projeto
     @GetMapping("/projetos/listar")
     public String listarProjetos(Model model) {

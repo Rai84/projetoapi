@@ -1,27 +1,25 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <title th:text="${title}">Gerenciamento de Projetos</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
 </head>
-<body class="bg-gray-100">
+<body class="bg-neutral-700 absolute top-0 left-40 w-[calc(var(--spacing)*10rem)] h-full m-4">
 
-<header class="bg-blue-600 p-4 text-white">
-    <h1 class="text-2xl" th:text="${headerTitle}">Gerenciamento de Projetos</h1>
-</header>
+    <div id="menuContainer"></div>
+    <div id="modalContainer" class="absolute"></div>
 
-<main class="p-8">
-    <div class="container mx-auto" th:fragment="content">
-        <!-- Aqui será inserido o conteúdo das páginas específicas -->
-    </div>
-</main>
+    <h1>Bem-vindo ao Gerenciamento de Projetos</h1>
+    <p>Esta é a página inicial do sistema.</p>
+    <p>Você pode navegar pelo menu à esquerda.</p>
 
-<footer class="bg-blue-600 p-4 text-white text-center">
-    <p>© 2025 - Sistema de Gerenciamento de Projetos</p>
-</footer>
+    <button onclick="openModal('modal1')" class="bg-blue-500 text-white p-2 rounded">Abrir Modal 1</button>
+    <button onclick="openModal('modal2')" class="bg-green-500 text-white p-2 rounded">Abrir Modal 2</button>
 
+    <script th:src="@{/js/menu.js}"></script>
+    <script th:src="@{/js/modal.js}"></script>
 </body>
 </html>

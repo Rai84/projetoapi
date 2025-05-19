@@ -1,16 +1,70 @@
 package com.gerenciamento.projetoapi.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import java.util.Set;
 
 @Entity
-@Data
+@Table(name = "projeto")
 public class Projeto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_projeto")
+    private Long id_projeto;
 
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false)
     private String descricao;
+
+    @ManyToOne
+    @JoinColumn(name = "id_equipe")
+    private Equipe equipe;
+
+    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
+    private Set<Tarefa> tarefas;
+
+    public Projeto() {
+    }
+
+    public Long getId_projeto() {
+        return id_projeto;
+    }
+
+    public void setId_projeto(Long id_projeto) {
+        this.id_projeto = id_projeto;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
+    }
+
+    public Set<Tarefa> getTarefas() {
+        return tarefas;
+    }
+
+    public void setTarefas(Set<Tarefa> tarefas) {
+        this.tarefas = tarefas;
+    }
 }

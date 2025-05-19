@@ -4,13 +4,19 @@ import com.gerenciamento.projetoapi.model.Equipe;
 import com.gerenciamento.projetoapi.repository.EquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EquipeService {
 
+    private final EquipeRepository equipeRepository;
+
     @Autowired
-    private EquipeRepository equipeRepository;
+    public EquipeService(EquipeRepository equipeRepository) {
+        this.equipeRepository = equipeRepository;
+    }
 
     public Equipe criarEquipe(Equipe equipe) {
         return equipeRepository.save(equipe);
@@ -20,16 +26,27 @@ public class EquipeService {
         return equipeRepository.findAll();
     }
 
+    public Optional<Equipe> buscarEquipe(Long id) {
+        return equipeRepository.findById(id);
+    }
+
     public Equipe atualizarEquipe(Long id, Equipe equipe) {
-        equipe.setId(id);
-        return equipeRepository.save(equipe);
+        Optional<Equipe> equipeExistente = equipeRepository.findById(id);
+        if (equipeExistente.isPresent()) {
+            Equipe e = equipeExistente.get();
+            e.setNome(equipe.getNome());
+            e.setProjetos(equipe.getProjetos());
+            return equipeRepository.save(e);
+        } else {
+            throw new IllegalArgumentException("Equipe não encontrada.");
+        }
     }
 
     public void deletarEquipe(Long id) {
-        equipeRepository.deleteById(id);
-    }
-
-    public Equipe buscarEquipe(Long id) {
-        return equipeRepository.findById(id).orElse(null);
+        if (equipeRepository.existsById(id)) {
+            equipeRepository.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("Equipe não encontrada.");
+        }
     }
 }
