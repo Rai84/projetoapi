@@ -27,7 +27,7 @@ public class SecurityConfig {
                                                 .permitAll()
                                                 .requestMatchers(HttpMethod.GET, "/projetos/listar", "/projetos/novo",
                                                                 "/projetos/editar/**")
-                                                .hasAnyRole("USER", "ADMIN")
+                                                .authenticated()
                                                 .anyRequest().authenticated())
                                 .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
                                 .headers(headers -> headers.frameOptions().sameOrigin())

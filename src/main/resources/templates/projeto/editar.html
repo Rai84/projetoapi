@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Projeto</title>
+</head>
+<body>
+    <h1>Editar Projeto</h1>
+    <form th:action="@{'/projetos/atualizar/' + ${projeto.id_projeto}}" th:object="${projeto}" method="post">
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}" required /><br/>
+
+        <label>Descrição:</label>
+        <textarea th:field="*{descricao}" required></textarea><br/>
+
+        <label>Equipe:</label>
+        <select th:field="*{equipe.id}">
+            <option th:each="equipe : ${equipes}" th:value="${equipe.id}" th:text="${equipe.nome}"
+                    th:selected="${equipe.id == projeto.equipe.id}"></option>
+        </select><br/>
+
+        <label>Usuário:</label>
+        <select th:field="*{usuario.id_usuario}">
+            <option th:each="usuario : ${usuarios}" th:value="${usuario.id_usuario}" th:text="${usuario.nome}"
+                    th:selected="${usuario.id_usuario == projeto.usuario.id_usuario}"></option>
+        </select><br/>
+
+        <button type="submit">Atualizar</button>
+    </form>
+    <a th:href="@{/projetos}">Voltar</a>
+</body>
+</html>

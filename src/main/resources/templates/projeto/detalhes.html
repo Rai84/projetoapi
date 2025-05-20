@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Detalhes do Projeto</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+</head>
+<body class="bg-neutral-700 absolute top-0 left-40 w-[calc(var(--spacing)*10rem)] h-full m-4 text-white">
+
+    <div id="menuContainer"></div>
+    <div id="modalContainer" class="absolute"></div>
+
+    <h1 th:text="${projeto.nome}">Nome do Projeto</h1>
+    <p th:text="${projeto.descricao}">Descrição</p>
+
+    <table>
+        <thead>
+            <tr class="">
+                <th>Pendente</th>
+                <th>Não iniciada</th>
+                <th>Em andamento</th>
+                <th>Concluído</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tarefa : ${projeto.tarefas}">
+                <td th:text="${tarefa.nome}">Nome da Tarefa</td>
+                <td th:text="${tarefa.descricao}">Descrição da Tarefa</td>
+                <td th:text="${#dates.format(tarefa.dataCriacao, 'dd/MM/yyyy')}">Data de Criação</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/">Voltar</a>
+
+    <script th:src="@{/js/menu.js}"></script>
+    <script th:src="@{/js/modal.js}"></script>
+</body>
+</html>

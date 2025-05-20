@@ -5,5 +5,14 @@
 
     <a th:href="@{/usuarios/editar/{id}(id=${idUsuario})}" class="text-blue-500 hover:underline">Editar</a>
 
+    <form th:action="@{/logout}" method="post" class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+        <button type="submit" class="flex items-center w-full">
+            <svg class="h-5 w-5 shrink-0 text-white transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8H6m0 0 4-4M6 8l4 4M13 1H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10" />
+            </svg>
+            <span class="ms-3 flex-1 whitespace-nowrap">Logout</span>
+        </button>
+    </form>
+
     <button onclick="closeModal()" class="mt-4 bg-red-500 text-white px-3 py-1 rounded">Fechar</button>
 </div>

@@ -36,7 +36,6 @@ public class TarefaService {
             Tarefa t = tarefaExistente.get();
             t.setDescricao(tarefa.getDescricao());
             t.setStatus(tarefa.getStatus());
-            t.setResponsavel(tarefa.getResponsavel());
             return tarefaRepository.save(t);
         } else {
             throw new IllegalArgumentException("Tarefa não encontrada.");

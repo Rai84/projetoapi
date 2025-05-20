@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Novo Projeto</title>
+</head>
+<body>
+    <h1>Novo Projeto</h1>
+    <form th:action="@{/projetos/salvar}" th:object="${projeto}" method="post">
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}" required /><br/>
+
+        <label>Descrição:</label>
+        <textarea th:field="*{descricao}" required></textarea><br/>
+
+
+        <button type="submit">Salvar</button>
+    </form>
+    <a th:href="@{/projetos}">Voltar</a>
+</body>
+</html>

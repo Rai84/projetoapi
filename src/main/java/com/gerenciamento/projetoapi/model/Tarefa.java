@@ -59,12 +59,4 @@ public class Tarefa {
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
     }
-
-    public Usuario getResponsavel() {
-        return responsavel;
-    }
-
-    public void setResponsavel(Usuario responsavel) {
-        this.responsavel = responsavel;
-    }
 }

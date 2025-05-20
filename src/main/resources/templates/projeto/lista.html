@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Projetos</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+    <h1>Lista de Projetos</h1>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Usuário</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="projeto : ${projetos}">
+                <td th:text="${projeto.id_projeto}">1</td>
+                <td th:text="${projeto.nome}">Nome do Projeto</td>
+                <td th:text="${projeto.descricao}">Descrição do Projeto</td>
+                <td th:text="${projeto.usuario.nome}">Nome do Usuário</td>
+                <td>
+                    <a th:href="@{/projeto/editar/{id}(id=${projeto.id_projeto})}">Editar</a> |
+                    <a th:href="@{/projeto/deletar/{id}(id=${projeto.id_projeto})}"
+                       onclick="return confirm('Tem certeza que deseja deletar este projeto?');">
+                       Deletar
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/projeto/novo">Adicionar novo projeto</a>
+</body>
+</html>

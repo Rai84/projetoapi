@@ -19,8 +19,8 @@ public class Projeto {
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "id_equipe")
-    private Equipe equipe;
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
     private Set<Tarefa> tarefas;
@@ -52,12 +52,12 @@ public class Projeto {
         this.descricao = descricao;
     }
 
-    public Equipe getEquipe() {
-        return equipe;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setEquipe(Equipe equipe) {
-        this.equipe = equipe;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Set<Tarefa> getTarefas() {

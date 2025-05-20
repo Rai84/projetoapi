@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
 </head>
 <body class="bg-neutral-700 absolute top-0 left-40 w-[calc(var(--spacing)*10rem)] h-full m-4 text-white">
 
@@ -13,11 +13,11 @@
     <div id="modalContainer" class="absolute"></div>
 
     
-    <p>Nome do Usuário: <span th:text="${username}"></span></p>
-    <h1>sgahbNJKM</h1>
-
-    <a th:href="@{/usuarios}">Lista de Usuários</a>
-    <a th:href="@{/usuarios/novo}">Novo Usuário</a>
+    <p>Olá: <span th:text="${username}"></span></p>
+    
+    <a th:href="@{/projetos/novo}" class="flex items-center px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+        + novo projeto
+    </a>
 
 
     <script th:src="@{/js/menu.js}"></script>
