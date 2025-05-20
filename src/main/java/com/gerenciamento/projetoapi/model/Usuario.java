@@ -20,10 +20,6 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
-    @ManyToOne
-    @JoinColumn(name = "id_papel")
-    private Papel papel;
-
     public Usuario() {
     }
 
@@ -59,11 +55,4 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Papel getPapel() {
-        return papel;
-    }
-
-    public void setPapel(Papel papel) {
-        this.papel = papel;
-    }
 }

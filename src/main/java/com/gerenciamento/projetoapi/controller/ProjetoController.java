@@ -45,7 +45,7 @@ public class ProjetoController {
         Usuario usuarioLogado = usuarioService.buscarPorEmail(userDetails.getUsername());
         projeto.setUsuario(usuarioLogado);
         projetoService.criarProjeto(projeto);
-        return "redirect:/projetos";
+        return "redirect:/";
     }
 
     @GetMapping("/editar/{id}")

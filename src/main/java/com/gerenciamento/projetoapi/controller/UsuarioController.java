@@ -55,7 +55,7 @@ public class UsuarioController {
     @PostMapping("/atualizar/{id}")
     public String atualizarUsuario(@PathVariable Long id, @Valid @ModelAttribute Usuario usuario) throws Exception {
         usuarioService.atualizarUsuario(id, usuario);
-        return "redirect:/usuarios";
+        return "redirect:/";
     }
 
     // Deletar usuário

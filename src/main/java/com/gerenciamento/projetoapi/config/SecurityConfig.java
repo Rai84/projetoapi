@@ -23,7 +23,7 @@ public class SecurityConfig {
                 http
                                 .authorizeHttpRequests(auth -> auth
                                                 .requestMatchers("/js/**", "/css/**", "/img/**", "/webjars/**",
-                                                                "/h2-console/**", "/login", "/logout", "/fragments/**")
+                                                                "/h2-console/**", "/login", "/logout", "/fragments/**", "/usuarios/novo/**", "/usuarios/salvar/**")
                                                 .permitAll()
                                                 .requestMatchers(HttpMethod.GET, "/projetos/listar", "/projetos/novo",
                                                                 "/projetos/editar/**")

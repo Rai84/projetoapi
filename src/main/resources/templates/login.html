@@ -21,5 +21,8 @@
     </form>
     <p th:if="${param.error}">Usuário ou senha inválidos.</p>
     <p th:if="${param.logout}">Logout efetuado com sucesso.</p>
+
+    <a th:href="@{/usuarios/novo}" class="text-blue-600 hover:underline">Criar novo usuário</a>
+
 </body>
 </html>

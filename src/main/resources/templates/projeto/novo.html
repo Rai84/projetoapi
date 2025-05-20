@@ -2,8 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Novo Projeto</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
 </head>
-<body>
+<body class="bg-neutral-700 absolute top-0 left-40 w-[calc(var(--spacing)*10rem)] h-full m-4 text-white">
+
+
+    <div id="menuContainer"></div>
+    <div id="modalContainer" class="absolute"></div>
+
     <h1>Novo Projeto</h1>
     <form th:action="@{/projetos/salvar}" th:object="${projeto}" method="post">
         <label>Nome:</label>
@@ -15,6 +22,9 @@
 
         <button type="submit">Salvar</button>
     </form>
-    <a th:href="@{/projetos}">Voltar</a>
+    <a th:href="@{/}">Voltar</a>
+
+    <script th:src="@{/js/menu.js}"></script>
+    <script th:src="@{/js/modal.js}"></script>
 </body>
 </html>

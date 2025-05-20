@@ -48,7 +48,6 @@ public class UsuarioService {
         usuarioExistente.setNome(usuarioAtualizado.getNome());
         usuarioExistente.setEmail(usuarioAtualizado.getEmail());
         usuarioExistente.setSenha(usuarioAtualizado.getSenha());
-        usuarioExistente.setPapel(usuarioAtualizado.getPapel());
 
         return usuarioRepository.save(usuarioExistente);
     }
