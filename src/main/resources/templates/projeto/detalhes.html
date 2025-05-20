@@ -24,22 +24,23 @@
 
 
 
-    <div class="grid grid-cols-4 gap-4">
+    <div class="grid grid-cols-4 gap-4 w-[83rem]">
         <!-- Pendente -->
         <div>
             <h2 class="text-xl font-semibold mb-2">Pendente</h2>
             <div class="space-y-2">
                 <div th:each="tarefa : ${projeto.tarefas}"
                      th:if="${tarefa.status.name() == 'PENDENTE'}"
-                     class="bg-neutral-800 p-4 rounded shadow">
+                     class="bg-neutral-800 p-4 rounded shadow w-[320px]">
                     <h3 class="font-bold" th:text="${tarefa.nome}">Título</h3>
+                    <h3 class="font-bold break-words whitespace-normal" th:text="${tarefa.descricao}">Descrição</h3>
 
-                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline">Editar</a>
+                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline relative top-[-50px] right-[-190px]">Editar</a>
 
                     <form th:action="@{/tarefas/{id}/excluir(id=${tarefa.id_tarefa})}" method="post" style="display:inline">
                         <button type="submit" 
-                                class="text-red-500 hover:underline"
-                                onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');">
+                                class="text-red-500 hover:underline relative top-[-50px] right-[-190px]"
+                                onclick="return confirm('Tem certeza que deseja deletar esta tarefa?'); ">
                             Deletar
                         </button>
                     </form>
@@ -63,14 +64,15 @@
             <div class="space-y-2">
                 <div th:each="tarefa : ${projeto.tarefas}"
                      th:if="${tarefa.status.name() == 'NAO_INICIADA'}"
-                     class="bg-neutral-800 p-4 rounded shadow">
+                     class="bg-neutral-800 p-4 rounded shadow w-[320px]">
                     <h3 class="font-bold" th:text="${tarefa.nome}">Título</h3>
+                    <h3 class="font-bold break-words whitespace-normal" th:text="${tarefa.descricao}">Descrição</h3>
 
-                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline">Editar</a>
+                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline relative top-[-50px] right-[-190px]">Editar</a>
 
                     <form th:action="@{/tarefas/{id}/excluir(id=${tarefa.id_tarefa})}" method="post" style="display:inline">
                         <button type="submit" 
-                                class="text-red-500 hover:underline"
+                                class="text-red-500 hover:underline relative top-[-50px] right-[-190px]"
                                 onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');">
                             Deletar
                         </button>
@@ -95,14 +97,15 @@
             <div class="space-y-2">
                 <div th:each="tarefa : ${projeto.tarefas}"
                      th:if="${tarefa.status.name() == 'EM_ANDAMENTO'}"
-                     class="bg-neutral-800 p-4 rounded shadow">
+                     class="bg-neutral-800 p-4 rounded shadow w-[320px]">
                     <h3 class="font-bold" th:text="${tarefa.nome}">Título</h3>
+                    <h3 class="font-bold break-words whitespace-normal" th:text="${tarefa.descricao}">Descrição</h3>
 
-                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline">Editar</a>
+                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline relative top-[-50px] right-[-190px]">Editar</a>
 
                     <form th:action="@{/tarefas/{id}/excluir(id=${tarefa.id_tarefa})}" method="post" style="display:inline">
                         <button type="submit" 
-                                class="text-red-500 hover:underline"
+                                class="text-red-500 hover:underline relative top-[-50px] right-[-190px]"
                                 onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');">
                             Deletar
                         </button>
@@ -127,14 +130,15 @@
             <div class="space-y-2">
                 <div th:each="tarefa : ${projeto.tarefas}"
                      th:if="${tarefa.status.name() == 'CONCLUIDA'}"
-                     class="bg-neutral-800 p-4 rounded shadow">
+                     class="bg-neutral-800 p-4 rounded shadow w-[320px]">
                     <h3 class="font-bold" th:text="${tarefa.nome}">Título</h3>
+                    <h3 class="font-bold break-words whitespace-normal" th:text="${tarefa.descricao}">Descrição</h3>
 
-                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline">Editar</a>
+                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline relative top-[-50px] right-[-190px]">Editar</a>
 
                     <form th:action="@{/tarefas/{id}/excluir(id=${tarefa.id_tarefa})}" method="post" style="display:inline">
                         <button type="submit" 
-                                class="text-red-500 hover:underline"
+                                class="text-red-500 hover:underline relative top-[-50px] right-[-190px]"
                                 onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');">
                             Deletar
                         </button>

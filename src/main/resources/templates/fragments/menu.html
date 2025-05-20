@@ -16,7 +16,7 @@
         <ul class="space-y-2 font-medium">
           <li>
               <div >
-                  <button onclick="openModal('modal1')" class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                  <button onclick="openModal('modal1')" class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-neutral-700 dark:text-white dark:hover:bg-neutral-700">
                       <svg class="h-5 w-5 shrink-0 text-white transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                           <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
                       </svg>
@@ -26,7 +26,7 @@
           </li>
           <li>
             <div >
-              <a href="/" class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+              <a href="/" class="group flex items-center rounded-lg p-2 text-gray-900 hover:bg-neutral-700 dark:text-white dark:hover:bg-neutral-700">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
                   <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
                 </svg>
@@ -38,7 +38,7 @@
           <li>
             <div x-data="{ isOpen: false }" class="relative inline-block">
               <!-- Dropdown toggle button -->
-              <button @click="isOpen = !isOpen" class="relative z-10 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-gray-800 focus:outline-none w-[115px] flex items-center">
+              <button @click="isOpen = !isOpen" class="relative z-10 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-neutral-700 focus:outline-none w-[115px] flex items-center">
                   <svg class="w-5 h-5 text-gray-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                   </svg>
@@ -46,13 +46,13 @@
               </button>
           
               <!-- Dropdown menu -->
-              <div x-show="isOpen" @click.away="isOpen = false" x-transition:enter="transition ease-out duration-100"x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="absolute right-[-20px] z-20 w-34 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800" >
-                <a th:href="@{/anotacoes/nova}" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+              <div x-show="isOpen" @click.away="isOpen = false" x-transition:enter="transition ease-out duration-100"x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="absolute right-[-20px] z-20 w-34 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-neutral-700" >
+                <a th:href="@{/anotacoes/nova}" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-neutral-700 dark:hover:bg-neutral-700 dark:hover:text-white">
                   + nova anotação
                 </a>
                 <!-- Lista de anotações -->
                 <div th:each="anotacao : ${anotacoes}">
-                    <a th:href="@{/anotacoes/detalhes/{id}(id=${anotacao.id_anotacao})}" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                    <a th:href="@{/anotacoes/detalhes/{id}(id=${anotacao.id_anotacao})}" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-neutral-700 dark:hover:bg-neutral-700 dark:hover:text-white"
                       th:text="${anotacao.titulo}">
                         Anotação Título
                     </a>
@@ -64,7 +64,7 @@
           <li>
             <div x-data="{ isOpen: false }" class="relative inline-block">
               <!-- Dropdown toggle button -->
-              <button @click="isOpen = !isOpen" class="relative z-10 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-gray-800 focus:outline-none w-[115px] flex items-center">
+              <button @click="isOpen = !isOpen" class="relative z-10 block p-2 text-gray-700 bg-white border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-neutral-700 focus:outline-none w-[115px] flex items-center">
                   <svg class="w-5 h-5 text-gray-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                   </svg>
@@ -72,13 +72,13 @@
               </button>
           
               <!-- Dropdown menu -->
-              <div x-show="isOpen" @click.away="isOpen = false" x-transition:enter="transition ease-out duration-100"x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="absolute right-[-20px] z-20 w-34 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800" >
-                <a th:href="@{/projetos/novo}" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+              <div x-show="isOpen" @click.away="isOpen = false" x-transition:enter="transition ease-out duration-100"x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="absolute right-[-20px] z-20 w-34 py-2 mt-2 origin-top-right bg-white rounded-md shadow-xl dark:bg-neutral-700" >
+                <a th:href="@{/projetos/novo}" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-neutral-700 dark:hover:bg-neutral-700 dark:hover:text-white">
                   + novo projeto
                 </a>
                 <!-- Lista de projetos -->
                 <div th:each="projeto : ${projetos}">
-                    <a th:href="@{/projetos/detalhes/{id}(id=${projeto.id_projeto})}" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                    <a th:href="@{/projetos/detalhes/{id}(id=${projeto.id_projeto})}" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-neutral-700 dark:hover:bg-neutral-700 dark:hover:text-white"
                       th:text="${projeto.nome}">
                         Projeto Nome
                     </a>

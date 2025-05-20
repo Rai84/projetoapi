@@ -51,6 +51,25 @@ public class AnotacaoController {
         return "redirect:/anotacoes";
     }
 
+    @PostMapping("/salvarDetalhes")
+    public String salvarAnotacaoDetalhes(@ModelAttribute Anotacao anotacao) {
+        Optional<Anotacao> existente = anotacaoService.buscarPorId(anotacao.getId_anotacao());
+        if (existente.isPresent()) {
+            Anotacao anotacaoExistente = existente.get();
+
+            // mantém o título original
+            // atualiza só o conteúdo (supondo que seja "conteudo")
+            anotacaoExistente.setConteudo(anotacao.getConteudo());
+
+            // mantém o usuário original
+            anotacaoExistente.setUsuario(anotacaoExistente.getUsuario());
+
+            // salva a anotação atualizada
+            anotacaoService.salvar(anotacaoExistente);
+        }
+        return "redirect:/anotacoes/detalhes/" + anotacao.getId_anotacao();
+    }
+
     @GetMapping("/editar/{id}")
     public String editarAnotacao(@PathVariable Long id, Model model) {
         Optional<Anotacao> anotacao = anotacaoService.buscarPorId(id);
@@ -83,9 +102,16 @@ public class AnotacaoController {
     public String detalhesAnotacao(@PathVariable Long id, Model model) {
         Optional<Anotacao> anotacao = anotacaoService.buscarPorId(id);
         if (anotacao.isPresent()) {
+            Usuario usuario = getUsuarioLogado();
+            if (!anotacao.get().getUsuario().getId_usuario().equals(usuario.getId_usuario())) {
+                return "redirect:/anotacoes";
+            }
             model.addAttribute("anotacao", anotacao.get());
-            return "anotacao/detalhes"; // nome do arquivo .html no templates
+            return "anotacao/detalhes";
         }
-        return "redirect:/anotacoes"; // ou página de erro personalizada    
+        return "redirect:/anotacoes";
     }
+
+    
+
 }   
