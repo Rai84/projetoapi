@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Detalhes da Anotação</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+</head>
+<body class="bg-neutral-700 absolute top-0 left-40 w-[calc(var(--spacing)*10rem)] h-full m-4 text-white">
+
+    <div id="menuContainer"></div>
+    <div id="modalContainer"></div>
+    <div id="modalNovoContainer"></div>
+
+
+    
+
+    
+    <script th:src="@{/js/menu.js}"></script>
+    <script th:src="@{/js/modal.js}"></script>
+</body>
+</html>

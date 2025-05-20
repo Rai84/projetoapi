@@ -32,13 +32,9 @@
                 <div th:each="tarefa : ${projeto.tarefas}"
                      th:if="${tarefa.status.name() == 'PENDENTE'}"
                      class="bg-neutral-800 p-4 rounded shadow">
-                    <h3 class="font-bold" th:text="${tarefa.descricao}">Título</h3>
+                    <h3 class="font-bold" th:text="${tarefa.nome}">Título</h3>
 
-                    
-                    <a th:href="@{/tarefas/modalEditar/{id}(id=${tarefa.id_tarefa})}"
-         class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm">
-         Editar
-      </a>
+                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline">Editar</a>
 
                     <form th:action="@{/tarefas/{id}/excluir(id=${tarefa.id_tarefa})}" method="post" style="display:inline">
                         <button type="submit" 
@@ -47,7 +43,7 @@
                             Deletar
                         </button>
                     </form>
-
+                    <br>
                     <label class="text-sm">Status:</label>
                     <form th:action="@{/tarefas/{id}/status(id=${tarefa.id_tarefa})}" method="post">
                         <select name="status" class="bg-neutral-600 text-white rounded p-1" onchange="this.form.submit()">
@@ -68,7 +64,18 @@
                 <div th:each="tarefa : ${projeto.tarefas}"
                      th:if="${tarefa.status.name() == 'NAO_INICIADA'}"
                      class="bg-neutral-800 p-4 rounded shadow">
-                    <h3 class="font-bold" th:text="${tarefa.descricao}">Título</h3>
+                    <h3 class="font-bold" th:text="${tarefa.nome}">Título</h3>
+
+                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline">Editar</a>
+
+                    <form th:action="@{/tarefas/{id}/excluir(id=${tarefa.id_tarefa})}" method="post" style="display:inline">
+                        <button type="submit" 
+                                class="text-red-500 hover:underline"
+                                onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');">
+                            Deletar
+                        </button>
+                    </form>
+                    <br>
                     <label class="text-sm">Status:</label>
                     <form th:action="@{/tarefas/{id}/status(id=${tarefa.id_tarefa})}" method="post">
                         <select name="status" class="bg-neutral-600 text-white rounded p-1" onchange="this.form.submit()">
@@ -89,7 +96,18 @@
                 <div th:each="tarefa : ${projeto.tarefas}"
                      th:if="${tarefa.status.name() == 'EM_ANDAMENTO'}"
                      class="bg-neutral-800 p-4 rounded shadow">
-                    <h3 class="font-bold" th:text="${tarefa.descricao}">Título</h3>
+                    <h3 class="font-bold" th:text="${tarefa.nome}">Título</h3>
+
+                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline">Editar</a>
+
+                    <form th:action="@{/tarefas/{id}/excluir(id=${tarefa.id_tarefa})}" method="post" style="display:inline">
+                        <button type="submit" 
+                                class="text-red-500 hover:underline"
+                                onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');">
+                            Deletar
+                        </button>
+                    </form>
+                    <br>
                     <label class="text-sm">Status:</label>
                     <form th:action="@{/tarefas/{id}/status(id=${tarefa.id_tarefa})}" method="post">
                         <select name="status" class="bg-neutral-600 text-white rounded p-1" onchange="this.form.submit()">
@@ -110,7 +128,18 @@
                 <div th:each="tarefa : ${projeto.tarefas}"
                      th:if="${tarefa.status.name() == 'CONCLUIDA'}"
                      class="bg-neutral-800 p-4 rounded shadow">
-                    <h3 class="font-bold" th:text="${tarefa.descricao}">Título</h3>
+                    <h3 class="font-bold" th:text="${tarefa.nome}">Título</h3>
+
+                    <a th:href="@{/tarefas/editar/{id}(id=${tarefa.id_tarefa})}" class="text-blue-500 hover:underline">Editar</a>
+
+                    <form th:action="@{/tarefas/{id}/excluir(id=${tarefa.id_tarefa})}" method="post" style="display:inline">
+                        <button type="submit" 
+                                class="text-red-500 hover:underline"
+                                onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');">
+                            Deletar
+                        </button>
+                    </form>
+                    <br>
                     <label class="text-sm">Status:</label>
                     <form th:action="@{/tarefas/{id}/status(id=${tarefa.id_tarefa})}" method="post">
                         <select name="status" class="bg-neutral-600 text-white rounded p-1" onchange="this.form.submit()">

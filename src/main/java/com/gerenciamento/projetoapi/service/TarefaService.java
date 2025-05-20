@@ -35,6 +35,7 @@ public class TarefaService {
                 .orElseThrow(() -> new IllegalArgumentException("Tarefa não encontrada com id: " + id));
 
         // Atualiza os campos necessários
+        tarefa.setNome(tarefaAtualizada.getNome());
         tarefa.setDescricao(tarefaAtualizada.getDescricao());
         tarefa.setStatus(tarefaAtualizada.getStatus());
 

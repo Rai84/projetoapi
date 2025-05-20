@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Minhas Anotações</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+</head>
+<body class="bg-neutral-700 absolute top-0 left-40 w-[calc(var(--spacing)*10rem)] h-full m-4 text-white">
+
+    <div id="menuContainer"></div>
+    <div id="modalContainer"></div>
+
+    <h1>Minhas Anotações</h1>
+
+    <a th:href="@{/anotacoes/nova}">Nova Anotação</a>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Conteúdo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="anotacao : ${anotacoes}">
+                <td th:text="${anotacao.titulo}">Título</td>
+                <td th:text="${anotacao.conteudo}">Conteúdo</td>
+                <td>
+                    <a th:href="@{'/anotacoes/editar/' + ${anotacao.id_anotacao}}">Editar</a> |
+                    <a th:href="@{'/anotacoes/deletar/' + ${anotacao.id_anotacao}}" onclick="return confirm('Deseja realmente excluir?');">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script th:src="@{/js/menu.js}"></script>
+    <script th:src="@{/js/modal.js}"></script>
+</body>
+</html>

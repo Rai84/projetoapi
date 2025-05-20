@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${anotacao.id_anotacao == null} ? 'Nova Anotação' : 'Editar Anotação'">Form Anotação</title>
+</head>
+<body>
+    <h1 th:text="${anotacao.id_anotacao == null} ? 'Nova Anotação' : 'Editar Anotação'"></h1>
+
+    <form th:action="@{/anotacoes/salvar}" th:object="${anotacao}" method="post">
+        <input type="hidden" th:field="*{id_anotacao}"/>
+
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="titulo" th:field="*{titulo}" required/><br><br>
+
+        <label for="conteudo">Conteúdo:</label><br>
+        <textarea id="conteudo" th:field="*{conteudo}" rows="5" cols="30" required></textarea><br><br>
+
+        <button type="submit">Salvar</button>
+        <a th:href="@{/anotacoes}">Cancelar</a>
+    </form>
+</body>
+</html>

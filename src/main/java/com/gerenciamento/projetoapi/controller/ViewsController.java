@@ -1,8 +1,11 @@
 package com.gerenciamento.projetoapi.controller;
 
+import com.gerenciamento.projetoapi.model.Anotacao;
+// import com.gerenciamento.projetoapi.model.Anotacao;
 import com.gerenciamento.projetoapi.model.Projeto;
 import com.gerenciamento.projetoapi.model.Usuario;
 import com.gerenciamento.projetoapi.service.ProjetoService;
+import com.gerenciamento.projetoapi.service.AnotacaoService;
 import com.gerenciamento.projetoapi.service.UsuarioService;
 import com.gerenciamento.projetoapi.service.details.UsuarioDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,9 @@ public class ViewsController {
 
     @Autowired
     private ProjetoService projetoService; // injetando serviço de projetos
+
+    @Autowired
+    private AnotacaoService anotacaoService; // injetando serviço de anotações
 
     // Página inicial
     @GetMapping("/")
@@ -57,6 +63,9 @@ public class ViewsController {
             // Buscar projetos do usuário logado e adicionar no model
             List<Projeto> projetos = projetoService.listarProjetosPorUsuario(usuario.getId_usuario());
             model.addAttribute("projetos", projetos);
+
+            List<Anotacao> anotacoes = anotacaoService.listarPorUsuario(usuario.getId_usuario());
+            model.addAttribute("anotacoes", anotacoes);
         } else {
             model.addAttribute("username", username);
             model.addAttribute("idUsuario", 0);

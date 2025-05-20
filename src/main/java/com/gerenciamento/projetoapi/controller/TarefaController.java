@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -40,16 +41,30 @@ public class TarefaController {
 
     // Mostrar formulário de edição
     @GetMapping("/editar/{id}")
-    public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
-        Tarefa tarefa = tarefaService.buscarTarefa(id)
-                .orElseThrow(() -> new IllegalArgumentException("Tarefa não encontrada: " + id));
+    public String editarTarefaForm(@PathVariable Long id, Model model) {
+        Optional<Tarefa> tarefaOpt = tarefaService.buscarTarefa(id);
+        if (tarefaOpt.isEmpty()) {
+            model.addAttribute("erro", "Tarefa não encontrada");
+            return "erro"; // página de erro customizada
+        }
+        Tarefa tarefa = tarefaOpt.get();
         model.addAttribute("tarefa", tarefa);
+        if (tarefa.getProjeto() != null) {
+            model.addAttribute("projetoId", tarefa.getProjeto().getId_projeto());
+            model.addAttribute("projetoNome", tarefa.getProjeto().getNome());
+            model.addAttribute("tarefa", tarefa);
+            model.addAttribute("projetoId", tarefa.getProjeto().getId_projeto()); // ou onde estiver armazenado
+            model.addAttribute("statusOptions", List.of("PENDENTE", "EM_ANDAMENTO", "CONCLUÍDA"));
+
+        }
+        model.addAttribute("statusOptions", StatusTarefa.values());
         return "tarefa/editar";
     }
 
     // Atualizar tarefa (submissão do formulário)
-    @PostMapping("/tarefas/{id}/editar")
+    @PostMapping("/atualizar/{id}")
     public String atualizarTarefa(@PathVariable Long id, @ModelAttribute Tarefa tarefaAtualizada) {
+        System.out.println("NOME ATUALIZADO: " + tarefaAtualizada.getNome());
         Tarefa tarefaOriginal = tarefaService.buscarTarefa(id)
                 .orElseThrow(() -> new IllegalArgumentException("Tarefa não encontrada: " + id));
         Long projetoId = tarefaOriginal.getProjeto().getId_projeto();
