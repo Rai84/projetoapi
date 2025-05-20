@@ -12,10 +12,14 @@ public class Tarefa {
     private Long id_tarefa;
 
     @Column(nullable = false)
-    private String descricao;
+    private String nome;
 
     @Column(nullable = false)
-    private String status;
+    private String descricao;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StatusTarefa status;
 
     @ManyToOne
     @JoinColumn(name = "id_projeto")
@@ -36,6 +40,14 @@ public class Tarefa {
         this.id_tarefa = id_tarefa;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }    
+
     public String getDescricao() {
         return descricao;
     }
@@ -44,11 +56,11 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public String getStatus() {
+    public StatusTarefa getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusTarefa status) {
         this.status = status;
     }
 
@@ -58,5 +70,21 @@ public class Tarefa {
 
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
+    }
+
+    public Usuario getResponsavel() {
+        return responsavel;
+    }
+
+    public void setResponsavel(Usuario responsavel) {
+        this.responsavel = responsavel;
+    }
+
+    // Enum interno para o status da tarefa
+    public static enum StatusTarefa {
+        PENDENTE,
+        NAO_INICIADA,
+        EM_ANDAMENTO,
+        CONCLUIDA
     }
 }

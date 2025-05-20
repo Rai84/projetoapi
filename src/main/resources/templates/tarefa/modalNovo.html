@@ -1,0 +1,35 @@
+<!-- templates/tarefas/modalNovo.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Criar Nova Tarefa</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100 p-4">
+
+<div class="max-w-lg mx-auto bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-semibold mb-4">Nova Tarefa</h2>
+    <form action="#" th:action="@{/tarefas/novo}" th:object="${tarefa}" method="post">
+        <input type="hidden" th:name="projetoId" th:value="${projetoId}" />
+        
+        <label for="nome">Nome da Tarefa:</label>
+        <input type="text" id="nome" th:field="*{nome}" required />
+        
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" th:field="*{descricao}"></textarea>
+
+        <label for="status">Status:</label>
+        <select id="status" th:field="*{status}">
+            <option value="PENDENTE">Pendente</option>
+            <option value="NAO_INICIADA">Não Iniciada</option>
+            <option value="EM_ANDAMENTO">Em Andamento</option>
+            <option value="CONCLUIDA">Concluída</option>
+        </select>
+        
+        <button type="submit">Criar</button>
+    </form>
+    
+</div>
+
+</body>
+</html>

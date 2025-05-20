@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Tarefa</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold mb-6">Editar Tarefa</h1>
+
+        <form th:action="@{'/tarefas/' + ${tarefa.id} + '/editar'}" method="post">
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Nome</label>
+                <input type="text" th:field="*{nome}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Descrição</label>
+                <input type="text" th:field="*{descricao}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Status</label>
+                <select th:field="*{status}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                    <option th:each="status : ${statusOptions}" th:value="${status}" th:text="${status}" 
+                            th:selected="${status == tarefa.status}"></option>
+                </select>
+            </div>
+
+            <div class="flex justify-between">
+                <a th:href="@{/projetos/{id}(id=${projetoId})}" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancelar</a>
+                <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Salvar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

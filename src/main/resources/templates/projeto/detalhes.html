@@ -1,37 +1,161 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Detalhes do Projeto</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+    <title>Detalhes do Projeto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
 </head>
 <body class="bg-neutral-700 absolute top-0 left-40 w-[calc(var(--spacing)*10rem)] h-full m-4 text-white">
 
     <div id="menuContainer"></div>
-    <div id="modalContainer" class="absolute"></div>
+    <div id="modalContainer"></div>
+    <div id="modalNovoContainer"></div>
 
-    <h1 th:text="${projeto.nome}">Nome do Projeto</h1>
-    <p th:text="${projeto.descricao}">Descrição</p>
+    <p>ProjetoId atual: <span th:text="${projeto.id_projeto}">ID</span></p>
 
-    <table>
-        <thead>
-            <tr class="">
-                <th>Pendente</th>
-                <th>Não iniciada</th>
-                <th>Em andamento</th>
-                <th>Concluído</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="tarefa : ${projeto.tarefas}">
-                <td th:text="${tarefa.nome}">Nome da Tarefa</td>
-                <td th:text="${tarefa.descricao}">Descrição da Tarefa</td>
-                <td th:text="${#dates.format(tarefa.dataCriacao, 'dd/MM/yyyy')}">Data de Criação</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="/">Voltar</a>
+
+    <h1 class="text-3xl font-bold mb-2" th:text="${projeto.nome}">Nome do Projeto</h1>
+    <p class="mb-6" th:text="${projeto.descricao}">Descrição</p>
+
+    <a th:href="@{/tarefas/modalNovo(projetoId=${projeto.id_projeto})}">Nova Tarefa</a>
+
+
+
+
+
+    <div class="grid grid-cols-4 gap-4">
+        <!-- Pendente -->
+        <div>
+            <h2 class="text-xl font-semibold mb-2">Pendente</h2>
+            <div class="space-y-2">
+                <div th:each="tarefa : ${projeto.tarefas}"
+                     th:if="${tarefa.status.name() == 'PENDENTE'}"
+                     class="bg-neutral-800 p-4 rounded shadow">
+                    <h3 class="font-bold" th:text="${tarefa.descricao}">Título</h3>
+
+                    
+                    <a th:href="@{/tarefas/modalEditar/{id}(id=${tarefa.id_tarefa})}"
+         class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm">
+         Editar
+      </a>
+
+                    <form th:action="@{/tarefas/{id}/excluir(id=${tarefa.id_tarefa})}" method="post" style="display:inline">
+                        <button type="submit" 
+                                class="text-red-500 hover:underline"
+                                onclick="return confirm('Tem certeza que deseja deletar esta tarefa?');">
+                            Deletar
+                        </button>
+                    </form>
+
+                    <label class="text-sm">Status:</label>
+                    <form th:action="@{/tarefas/{id}/status(id=${tarefa.id_tarefa})}" method="post">
+                        <select name="status" class="bg-neutral-600 text-white rounded p-1" onchange="this.form.submit()">
+                            <option value="PENDENTE" th:selected="${tarefa.status.name() == 'PENDENTE'}">Pendente</option>
+                            <option value="NAO_INICIADA" th:selected="${tarefa.status.name() == 'NAO_INICIADA'}">Não iniciada</option>
+                            <option value="EM_ANDAMENTO" th:selected="${tarefa.status.name() == 'EM_ANDAMENTO'}">Em andamento</option>
+                            <option value="CONCLUIDA" th:selected="${tarefa.status.name() == 'CONCLUIDA'}">Concluída</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Não Iniciada -->
+        <div>
+            <h2 class="text-xl font-semibold mb-2">Não iniciada</h2>
+            <div class="space-y-2">
+                <div th:each="tarefa : ${projeto.tarefas}"
+                     th:if="${tarefa.status.name() == 'NAO_INICIADA'}"
+                     class="bg-neutral-800 p-4 rounded shadow">
+                    <h3 class="font-bold" th:text="${tarefa.descricao}">Título</h3>
+                    <label class="text-sm">Status:</label>
+                    <form th:action="@{/tarefas/{id}/status(id=${tarefa.id_tarefa})}" method="post">
+                        <select name="status" class="bg-neutral-600 text-white rounded p-1" onchange="this.form.submit()">
+                            <option value="PENDENTE" th:selected="${tarefa.status.name() == 'PENDENTE'}">Pendente</option>
+                            <option value="NAO_INICIADA" th:selected="${tarefa.status.name() == 'NAO_INICIADA'}">Não iniciada</option>
+                            <option value="EM_ANDAMENTO" th:selected="${tarefa.status.name() == 'EM_ANDAMENTO'}">Em andamento</option>
+                            <option value="CONCLUIDA" th:selected="${tarefa.status.name() == 'CONCLUIDA'}">Concluída</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Em andamento -->
+        <div>
+            <h2 class="text-xl font-semibold mb-2">Em andamento</h2>
+            <div class="space-y-2">
+                <div th:each="tarefa : ${projeto.tarefas}"
+                     th:if="${tarefa.status.name() == 'EM_ANDAMENTO'}"
+                     class="bg-neutral-800 p-4 rounded shadow">
+                    <h3 class="font-bold" th:text="${tarefa.descricao}">Título</h3>
+                    <label class="text-sm">Status:</label>
+                    <form th:action="@{/tarefas/{id}/status(id=${tarefa.id_tarefa})}" method="post">
+                        <select name="status" class="bg-neutral-600 text-white rounded p-1" onchange="this.form.submit()">
+                            <option value="PENDENTE" th:selected="${tarefa.status.name() == 'PENDENTE'}">Pendente</option>
+                            <option value="NAO_INICIADA" th:selected="${tarefa.status.name() == 'NAO_INICIADA'}">Não iniciada</option>
+                            <option value="EM_ANDAMENTO" th:selected="${tarefa.status.name() == 'EM_ANDAMENTO'}">Em andamento</option>
+                            <option value="CONCLUIDA" th:selected="${tarefa.status.name() == 'CONCLUIDA'}">Concluída</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Concluída -->
+        <div>
+            <h2 class="text-xl font-semibold mb-2">Concluída</h2>
+            <div class="space-y-2">
+                <div th:each="tarefa : ${projeto.tarefas}"
+                     th:if="${tarefa.status.name() == 'CONCLUIDA'}"
+                     class="bg-neutral-800 p-4 rounded shadow">
+                    <h3 class="font-bold" th:text="${tarefa.descricao}">Título</h3>
+                    <label class="text-sm">Status:</label>
+                    <form th:action="@{/tarefas/{id}/status(id=${tarefa.id_tarefa})}" method="post">
+                        <select name="status" class="bg-neutral-600 text-white rounded p-1" onchange="this.form.submit()">
+                            <option value="PENDENTE" th:selected="${tarefa.status.name() == 'PENDENTE'}">Pendente</option>
+                            <option value="NAO_INICIADA" th:selected="${tarefa.status.name() == 'NAO_INICIADA'}">Não iniciada</option>
+                            <option value="EM_ANDAMENTO" th:selected="${tarefa.status.name() == 'EM_ANDAMENTO'}">Em andamento</option>
+                            <option value="CONCLUIDA" th:selected="${tarefa.status.name() == 'CONCLUIDA'}">Concluída</option>
+                        </select>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="/" class="mt-6 inline-block text-blue-400 hover:underline">Voltar</a>
+
+    <script>
+        function atualizarStatus(select) {
+            const id = select.getAttribute('data-id');
+            const novoStatus = select.value;
+    
+            const formData = new FormData();
+            formData.append("status", novoStatus);
+    
+            fetch(`/tarefas/${id}/status`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else if (response.ok) {
+                    location.reload(); // Atualiza a página para mover a tarefa de coluna
+                } else {
+                    alert("Erro ao atualizar status.");
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao atualizar tarefa:", error);
+                alert("Erro de conexão.");
+            });
+        }
+    </script>
+    
 
     <script th:src="@{/js/menu.js}"></script>
     <script th:src="@{/js/modal.js}"></script>
