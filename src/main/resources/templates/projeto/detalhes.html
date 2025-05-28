@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes do Projeto</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
@@ -18,7 +20,7 @@
     <h1 class="text-3xl font-bold mb-2" th:text="${projeto.nome}">Nome do Projeto</h1>
     <p class="mb-6" th:text="${projeto.descricao}">Descrição</p>
 
-    <a th:href="@{/tarefas/modalNovo(projetoId=${projeto.id_projeto})}">Nova Tarefa</a>
+    <a th:href="@{/tarefas/modalNovo(projetoId=${projeto.id_projeto})}" class="text-blue-500 hover:underline">Nova Tarefa</a>
 
 
 

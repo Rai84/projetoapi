@@ -44,6 +44,8 @@ public class ViewsController {
         return "index";
     }
 
+    
+
     // Página menu - aqui adicionamos os projetos do usuário logado
     @GetMapping("/fragments/menu")
     public String menu(Model model) {

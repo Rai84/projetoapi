@@ -48,7 +48,7 @@ public class AnotacaoController {
         Usuario usuario = getUsuarioLogado();
         anotacao.setUsuario(usuario);
         anotacaoService.salvar(anotacao);
-        return "redirect:/anotacoes";
+        return "redirect:/";
     }
 
     @PostMapping("/salvarDetalhes")

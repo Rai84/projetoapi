@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Projeto</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
 </head>
 <body class="bg-neutral-700 absolute top-0 left-40 w-[calc(var(--spacing)*10rem)] h-full m-4 text-white">
 
-
     <div id="menuContainer"></div>
     <div id="modalContainer" class="absolute"></div>
 
-    <h1>Novo Projeto</h1>
-    <form th:action="@{/projetos/salvar}" th:object="${projeto}" method="post">
-        <label>Nome:</label>
-        <input type="text" th:field="*{nome}" required /><br/>
+    <div class="max-w-xl mx-auto p-8 bg-white rounded-lg shadow-xl text-gray-800">
+        <h1 class="text-3xl font-bold text-center mb-8">Criar Novo Projeto</h1>
+        <form th:action="@{/projetos/salvar}" th:object="${projeto}" method="post" class="space-y-6">
+            <div>
+                <label for="nome" class="block text-sm font-medium text-gray-700 mb-2">Nome do Projeto:</label>
+                <input type="text" id="nome" name="nome" th:field="*{nome}" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-base"
+                       placeholder="Ex: Desenvolvimento do Sistema X">
+            </div>
 
-        <label>Descrição:</label>
-        <textarea th:field="*{descricao}" required></textarea><br/>
+            <div>
+                <label for="descricao" class="block text-sm font-medium text-gray-700 mb-2">Descrição:</label>
+                <textarea id="descricao" name="descricao" th:field="*{descricao}" required
+                          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-base h-32 resize-y"
+                          placeholder="Descreva o propósito e os objetivos do projeto..."></textarea>
+            </div>
 
-
-        <button type="submit">Salvar</button>
-    </form>
-    <a th:href="@{/}">Voltar</a>
+            <div class="flex justify-end gap-4 mt-8">
+                <a th:href="@{/}"
+                   class="inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition duration-150 ease-in-out">
+                    Voltar
+                </a>
+                <button type="submit"
+                        class="inline-flex items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                    Salvar Projeto
+                </button>
+            </div>
+        </form>
+    </div>
 
     <script th:src="@{/js/menu.js}"></script>
     <script th:src="@{/js/modal.js}"></script>

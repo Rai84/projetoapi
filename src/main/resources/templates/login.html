@@ -1,28 +1,34 @@
-<!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h2>Login</h2>
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label for="username">Email:</label>
-            <input type="text" id="username" name="username" autofocus="autofocus" />
-        </div>
-        <div>
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" />
-        </div>
-        <div>
-            <button type="submit">Entrar</button>
-        </div>
-    </form>
-    <p th:if="${param.error}">Usuário ou senha inválidos.</p>
-    <p th:if="${param.logout}">Logout efetuado com sucesso.</p>
+<body class="bg-neutral-700 flex items-center justify-center min-h-screen">
+    <div class="bg-neutral-800 p-8 rounded-lg shadow-md w-full max-w-sm">
+        <h2 class="text-3xl font-bold text-center mb-6 text-white">Login</h2>
+        <form th:action="@{/login}" method="post" class="space-y-4">
+            <div>
+                <label for="username" class="block text-sm font-medium text-white mb-1">Email:</label>
+                <input type="text" id="username" name="username" autofocus="autofocus"
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-white mb-1">Senha:</label>
+                <input type="password" id="password" name="password"
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
+            </div>
+            <div>
+                <button type="submit"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Entrar
+                </button>
+            </div>
+        </form>
+        <p th:if="${param.error}" class="mt-4 text-center text-red-600 text-sm">Usuário ou senha inválidos.</p>
 
-    <a th:href="@{/usuarios/novo}" class="text-blue-600 hover:underline">Criar novo usuário</a>
-
+        <div class="mt-6 text-center">
+            <a th:href="@{/usuarios/novo}" class="font-medium text-blue-600 hover:text-blue-500">Criar novo usuário</a>
+        </div>
+    </div>
 </body>
 </html>

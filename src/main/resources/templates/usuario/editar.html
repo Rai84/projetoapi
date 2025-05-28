@@ -1,47 +1,63 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Usuário</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-8">
+<!-- Modal Editar Usuário -->
+<div id="editarUsuarioModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen px-4">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
-    <div class="max-w-lg mx-auto bg-white rounded-xl shadow-md p-6">
-        <h2 class="text-2xl font-semibold mb-4">Editar Usuário</h2>
-        
-        <form th:action="@{/usuarios/atualizar/{id}(id=${usuario.id_usuario})}" th:object="${usuario}" method="post" class="space-y-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-lg w-full z-50 p-6 relative">
+            <h2 class="text-2xl font-semibold mb-4">Editar Usuário</h2>
 
-            <!-- Nome -->
-            <div>
-                <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
-                <input type="text" id="nome" name="nome" th:value="${usuario.nome}" 
-                       class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
-            </div>
+            <form th:action="@{/usuarios/atualizar/{id}(id=${usuario.id_usuario})}" 
+                  th:object="${usuario}" 
+                  method="post" 
+                  class="space-y-4">
 
-            <!-- Email -->
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" id="email" name="email" th:value="${usuario.email}" 
-                       class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
-            </div>
+                <!-- Nome -->
+                <div>
+                    <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
+                    <input type="text" id="nome" name="nome" th:value="${usuario.nome}" 
+                           class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+                </div>
 
-            <!-- Senha -->
-            <div>
-                <label for="senha" class="block text-sm font-medium text-gray-700">Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Deixe em branco para não alterar"
-                       class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-            </div>
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" th:value="${usuario.email}" 
+                           class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+                </div>
 
-            <!-- Botões -->
-            <div class="flex justify-between items-center">
-                <a href="/usuarios/listar" class="text-gray-600 hover:text-gray-900">Voltar</a>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-                    Salvar
-                </button>
-            </div>
-        </form>
+                <!-- Senha -->
+                <div>
+                    <label for="senha" class="block text-sm font-medium text-gray-700">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Deixe em branco para não alterar"
+                           class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                </div>
+
+                <!-- Botões -->
+                <div class="flex justify-between items-center">
+                    <button type="button" onclick="fecharModal()" class="text-gray-600 hover:text-gray-900">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                        Salvar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Botão de fechar no canto superior direito -->
+            <button type="button" onclick="fecharModal()" 
+                    class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                ✖
+            </button>
+        </div>
     </div>
+</div>
 
-</body>
-</html>
+<script>
+    function abrirModal() {
+        document.getElementById('editarUsuarioModal').classList.remove('hidden');
+    }
+
+    function fecharModal() {
+        document.getElementById('editarUsuarioModal').classList.add('hidden');
+    }
+</script>

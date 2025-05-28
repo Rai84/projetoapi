@@ -2,7 +2,10 @@ package com.gerenciamento.projetoapi.controller;
 
 import com.gerenciamento.projetoapi.model.Usuario;
 import com.gerenciamento.projetoapi.service.UsuarioService;
+import com.gerenciamento.projetoapi.service.details.UsuarioDetails;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -53,10 +59,39 @@ public class UsuarioController {
 
     // Atualizar usuário
     @PostMapping("/atualizar/{id}")
-    public String atualizarUsuario(@PathVariable Long id, @Valid @ModelAttribute Usuario usuario) throws Exception {
+    public String atualizarUsuario(@PathVariable Long id, @Valid @ModelAttribute Usuario usuario, Authentication authentication, HttpServletRequest request) throws Exception {
         usuarioService.atualizarUsuario(id, usuario);
+    
+        // Atualizar o objeto UsuarioDetails na sessão
+        if (authentication != null && authentication.getPrincipal() instanceof UsuarioDetails) {
+            UsuarioDetails usuarioDetails = (UsuarioDetails) authentication.getPrincipal();
+        
+            // Atualizar os dados do usuário no UsuarioDetails (ou recarregar do banco)
+            Usuario usuarioAtualizado = usuarioService.buscarPorEmail(usuarioDetails.getEmail());
+            
+            UsuarioDetails novoUsuarioDetails = new UsuarioDetails(usuarioAtualizado);
+        
+            // Crie um novo token de autenticação com o novo principal
+            Authentication novoAuth = new UsernamePasswordAuthenticationToken(
+                novoUsuarioDetails,
+                authentication.getCredentials(),
+                novoUsuarioDetails.getAuthorities()
+            );
+        
+            // Atualize o contexto de segurança
+            SecurityContextHolder.getContext().setAuthentication(novoAuth);
+        
+            // Opcional: atualizar também a sessão HTTP (se necessário)
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+            }
+        }
+    
         return "redirect:/";
     }
+
+
 
     // Deletar usuário
     @GetMapping("/deletar/{id}")
